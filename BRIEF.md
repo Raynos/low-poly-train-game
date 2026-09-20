@@ -10,7 +10,7 @@ One camera button toggles overview/follow/cab; no separate camera-selection scre
 
 Take the fire truck gameplay audit forward: simple motor controls must preserve decisions.
 Meadow objects respond to touch, station friends have child-chosen seating, and orchard trees
-can be harvested in any order. Carry the result in the train, then return to place selection.
+can be harvested in any order. Carry the result in the train, then show an illustrated success modal with Back to menu and optional deliberate replay.
 Never require a different place or force immediate replay.
 
 Secondary goal: optional English words and phrases grounded in play. Model, leave space,

@@ -21,3 +21,7 @@
 | 2026-09-20 | Icons are not centered | Measured artwork bounds and corrected small-screen button sizing. |
 | 2026-09-20 | Give ten ideas to make the world feel alive | Proposed sheep, wind, water, passengers, birds, butterflies, responsive orchard, locomotive motion, clouds and small greetings; implementation not requested yet. |
 | 2026-09-20 | Five Kokoro voice options and listening samples; then regenerate all with Nicole | Created five matching auditions; switched all60 production clips and generator to af_nicole. |
+| 2026-09-20 | Proper illustrated success modal with action back to menu | Replaces small corner panel with generated hero dialog; back goes to main menu, replay is optional. |
+| 2026-09-20 | Sheep/tree world phrase icons in other two levels | Shared discoverable objects now exist in every visit, alongside orchard picking targets. |
+| 2026-09-20 | Passengers slide backward instead of staying seated | Parent passengers and apple crates to the carriage, with stable local seat positions. |
+| 2026-09-20 | Keep assistant testing muted; do not play audio | All browser runs use mute=1; audio validation decodes files without speaker playback. |

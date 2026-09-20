@@ -15,7 +15,7 @@ Choose a place. Hold the green button to drive; release to stop. One camera butt
 - **Station:** stop, choose each friend and a seat, then take everyone around the railway.
 - **Orchard:** choose trees to pick three apples, then carry the fruit to the station.
 
-Finished visits return to destination selection through “Where next?”. Every place remains
+Finished visits show an illustrated success dialog with “Back to menu” and optional replay. Every place remains
 available, including repeats. Pause, leave or stop at any point. Keyboard Space also drives.
 
 Words follow the action. Tap the speaker to hear a phrase again, or the book for optional

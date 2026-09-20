@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 const url = process.argv[2] ?? 'http://127.0.0.1:4187';
 const out = 'tmp/webkit-check'; await mkdir(out, { recursive: true });
 const browser = await webkit.launch({ headless: true });
-const context = await browser.newContext({ viewport: { width: 844, height: 390 }, isMobile: true, hasTouch: true });
+const context = await browser.newContext({ viewport: { width: 844, height: 390 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
 const page = await context.newPage(); const errors = [], checks = []; page.on('pageerror', e => errors.push(e.message));
 function check(name, value) { assert.ok(value, name); checks.push(name); console.log(`PASS ${name}`); }
 const state = () => page.evaluate(() => window.__train.snapshot());
@@ -15,6 +15,7 @@ async function holdUntil(predicate) {
 try {
   await page.goto(`${url}/?debug=1&mute=1`); await page.waitForFunction(() => document.querySelector('#game').dataset.ready === 'true');
   check('WebKit dismisses loading and renders home', await page.locator('#loading').isHidden());
+  check('WebKit uses Retina HDR antialiasing', (await state()).renderQuality.pixelRatio === 2 && (await state()).renderQuality.hdr);
   await page.locator('#play').tap();
   for (const destination of ['meadow','station','orchard']) {
     await page.locator(`[data-place="${destination}"]`).tap();
@@ -27,6 +28,8 @@ try {
       check('World touch target works', (await state()).discoveries.includes('tree'));
       await page.locator('#places').tap(); continue;
     }
+    await page.locator('[data-target="sheep"]').tap();
+    check(`${destination}: world phrase practice`, (await state()).phrase === 'Hello, sheep.');
     await holdUntil(() => window.__train.snapshot().phase === 'helping');
     if (destination === 'station') {
       for (const i of [2,0,1]) { await page.locator(`[data-passenger="${i}"]`).tap(); await page.locator(`[data-seat="${i}"]`).tap(); }
@@ -34,7 +37,7 @@ try {
     check(`${destination}: chosen objects load`, (await state()).cargo === 3 && (await state()).phase === 'riding');
     await holdUntil(() => window.__train.snapshot().phase === 'finished');
     await page.screenshot({ path: `${out}/${destination}-finished.png` }); await page.locator('#finish').tap();
-    check(`${destination}: finished visit returns to choices`, (await state()).screen === 'select');
+    check(`${destination}: finished visit returns to menu`, (await state()).screen === 'home'); await page.locator('#play').tap();
   }
   await page.locator('#back').tap(); await page.locator('#settings').tap();
   await page.locator('#length-setting').selectOption('2'); await page.locator('#sound-setting').uncheck(); await page.locator('#close-modal').tap();

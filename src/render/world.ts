@@ -100,6 +100,10 @@ export function createWorld(canvas: HTMLCanvasElement) {
   resize(); window.addEventListener('resize', resize);
   return {
     renderer,
+    cargoAnchors: () => ({
+      passengers: people.map(person => ({ attached: person.parent === train.wagon, position: person.position.toArray() })),
+      crates: crates.map(box => ({ attached: box.parent === train.wagon, visible: box.visible, position: box.position.toArray() })),
+    }),
     quality: () => ({ hdr, aa: hdr ? 'MSAA + SMAA' : 'MSAA + FXAA', samples: sceneTarget.samples, toneMapping: 'AgX', pixelRatio: renderer.getPixelRatio(), width: canvas.width, height: canvas.height }),
     /** Scene-derived place cards. Separate camera/target; simulation and live viewport stay intact. */
     thumbnail(destination: Destination): string {
@@ -123,12 +127,14 @@ export function createWorld(canvas: HTMLCanvasElement) {
     },
     react(id: string) { lastDiscovery = id; discoveryAge = 0; },
     targets(state: TrainState) {
-      const targets: { id: string; position: number[] }[] = state.destination === 'orchard' && state.phase === 'helping'
-        ? [0, 1, 2].map(i => ({ id: `fruit-${i}`, position: [-17, 3.5, (i - 1) * 3.6] }))
-        : state.destination === 'meadow' ? [
-          { id: 'sheep', position: [-6, 1.7, 3] }, { id: 'tree', position: [5, 4, -4] },
-          { id: 'river', position: [0, 0.5, 2] }, { id: 'bridge', position: [0, 1, 8] },
-        ] : [];
+      // Every visit shares the living world and its optional language discoveries.
+      const targets: { id: string; position: number[] }[] = [
+        { id: 'sheep', position: [-6, 1.7, 3] }, { id: 'tree', position: [5, 4, -4] },
+        { id: 'river', position: [0, 0.5, 2] }, { id: 'bridge', position: [0, 1, 8] },
+      ];
+      if (state.destination === 'orchard' && state.phase === 'helping') {
+        targets.push(...[0, 1, 2].map(i => ({ id: `fruit-${i}`, position: [-17, 3.5, (i - 1) * 3.6] })));
+      }
       return targets.map(item => {
         project.set(item.position[0]!, item.position[1]!, item.position[2]!).project(camera);
         return { id: item.id, x: (project.x * 0.5 + 0.5) * canvas.clientWidth, y: (-project.y * 0.5 + 0.5) * canvas.clientHeight, visible: project.z > -1 && project.z < 1 && Math.abs(project.x) < 0.91 && Math.abs(project.y) < 0.8 };
@@ -153,16 +159,21 @@ export function createWorld(canvas: HTMLCanvasElement) {
       for (let i = 0; i < 3; i++) {
         const person = people[i]!;
         const seat = state.destination === 'station' ? state.seats.indexOf(i) : -1;
-        const personTarget = new T.Vector3(13.7, 0.42, (i - 1) * 1.15);
-        if (seat >= 0) personTarget.set(wagonPose.x + Math.sin(wagonPose.heading) * (seat - 1) * 0.58, 1.05, wagonPose.z + Math.cos(wagonPose.heading) * (seat - 1) * 0.58);
-        if (previousView.startsWith(screen)) person.position.lerp(personTarget, reduced ? 1 : Math.min(1, dt * 5)); else person.position.copy(personTarget);
-        person.rotation.y = seat >= 0 ? wagonPose.heading : -Math.PI / 2;
+        // A seated rider belongs to the carriage, never a delayed world-space follower.
+        if (seat >= 0) {
+          if (person.parent !== train.wagon) train.wagon.add(person);
+          person.position.set(0, 1.02, (seat - 1) * 0.58);
+          person.rotation.y = 0;
+        } else {
+          if (person.parent !== scene) scene.add(person);
+          person.position.set(13.7, 0.42, (i - 1) * 1.15);
+          person.rotation.y = -Math.PI / 2;
+        }
         const box = crates[i]!;
         box.visible = state.destination === 'orchard' && state.fruit.length > i;
-        const crateTarget = new T.Vector3(wagonPose.x + Math.sin(wagonPose.heading) * (i - 1) * 0.59, 1.06, wagonPose.z + Math.cos(wagonPose.heading) * (i - 1) * 0.59);
-        if (!box.userData.loaded && box.visible) box.position.set(-17, 3, ((state.fruit[i] ?? 1) - 1) * 3.6);
-        box.userData.loaded = box.visible;
-        box.position.lerp(crateTarget, reduced ? 1 : Math.min(1, dt * 5)); box.rotation.y = wagonPose.heading;
+        if (box.parent !== train.wagon) train.wagon.add(box);
+        box.position.set(0, 1.06, (i - 1) * 0.59);
+        box.rotation.y = 0;
       }
       for (let i = 0; i < steam.length; i++) {
         const puff = steam[i]!; const age = (clock * 0.5 + i / steam.length) % 1;

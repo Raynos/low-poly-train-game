@@ -3,7 +3,7 @@
 Read BRIEF.md, project/status/project-status.md, and project/TASK_LIST.md before changes.
 Based on ../low-poly-fire-truck. The first approved game is implemented and deployed.
 Read docs/LANGUAGE-PLAY.md before changing narration or language interactions.
-Preserve meaningful object choices and finish-to-selector flow; see docs/design/AUDIT-LEARNINGS.md.
+Preserve meaningful object choices and illustrated success-to-main-menu flow; see docs/design/AUDIT-LEARNINGS.md.
 
 - Age three, Montessori-inspired: calm child-directed repetition, concrete cause and effect.
   No scores, timers, failure, ads, purchases, accounts, or reading-dependent play.

@@ -20,10 +20,25 @@ async function capture(name) { await browser('screenshot', `${out}/${name}.png`)
 async function practice(destination, phase) {
   check(`${destination}/${phase}: three large illustrated word buttons`, await evaluate(`(() => {
     const buttons=[...document.querySelectorAll('[data-practice]')];
-    return buttons.length===3 && buttons.every(b=>{const r=b.getBoundingClientRect();return r.width>=64 && r.height>=64 && getComputedStyle(b.querySelector('.game-icon')).backgroundImage.includes('toy-icons.png')});
+    return buttons.length===3 && buttons.every(b=>{const r=b.getBoundingClientRect();return r.width>=64 && r.height>=64 && getComputedStyle(b.querySelector('.game-icon-art')).backgroundImage.includes('toy-icons.png')});
   })()`));
   await click('[data-practice="train"]');
   check(`${destination}/${phase}: word button models phrase`, (await snapshot()).phrase === 'Little train.');
+}
+async function explore(place) {
+  for (const name of ['sheep','tree']) {
+    await click(`[data-target="${name}"]`);
+    check(`${place}: world ${name} models a phrase`, (await snapshot()).discoveries.includes(name) && (await snapshot()).phrase === (name === 'sheep' ? 'Hello, sheep.' : 'Green tree.'));
+  }
+}
+async function finishVisit(place) {
+  await wait("document.querySelector('#modal').open && document.querySelector('.success-art').complete && document.querySelector('.success-art').naturalWidth > 0");
+  check(`${place}: illustrated success dialog stops driving`, (await snapshot()).paused && !(await snapshot()).held && await evaluate("document.querySelector('#modal').dataset.kind === 'success'"));
+  await capture(`${place}-success`);
+  await click('#back-to-world'); await practice(place,'finished');
+  await click('#camera'); check(`${place}: dismissing success does not reopen on UI changes`, await evaluate("!document.querySelector('#modal').open"));
+  await click('#show-success'); await click('#finish');
+  check(`${place}: success returns to main menu`, (await snapshot()).screen === 'home');
 }
 async function holdUntil(condition) {
   const box = await evaluate("(() => {const b=document.querySelector('#drive').getBoundingClientRect();return {x:b.x+b.width/2,y:b.y+b.height/2}})()");
@@ -34,6 +49,7 @@ try {
   await browser('open', `${url}/?debug=1&mute=1`); await browser('set','viewport','844','390');
   await wait("document.querySelector('#game').dataset.ready === 'true'");
   await wait("document.querySelector('#pwa-status').textContent.includes('Ready to play offline')");
+  check('HDR and anti-aliasing pipeline is active', (await snapshot()).renderQuality.hdr && (await snapshot()).renderQuality.aa === 'MSAA + SMAA' && (await snapshot()).renderQuality.samples >= 2);
   await capture('home-phone'); await click('#play'); await capture('selector-phone'); await click('[data-place="meadow"]');
   await practice('meadow','driving');
   await holdUntil('window.__train.snapshot().distance > 6');
@@ -52,18 +68,21 @@ try {
     await evaluate(event === 'pointercancel' || event === 'lostpointercapture' ? `document.querySelector('#drive').dispatchEvent(new PointerEvent('${event}',{bubbles:true}))` : `window.dispatchEvent(new Event('${event}'))`);
     check(`${event} releases input`, !(await snapshot()).held && (await snapshot()).speed === 0); await browser('mouse','up');
   }
-  await click('#places'); await click('[data-place="station"]'); await practice('station','driving');
+  await click('#places'); await click('[data-place="station"]'); await practice('station','driving'); await explore('station');
   await holdUntil("window.__train.snapshot().phase === 'helping'"); check('Station arrival does not auto-board passengers', (await snapshot()).cargo === 0); await capture('station-arrival'); await practice('station','helping');
   await click('[data-passenger="2"]'); await click('[data-seat="0"]');
   await click('[data-passenger="0"]'); await click('[data-seat="0"]'); check('Occupied seat preserves child selection', (await snapshot()).selected === 0 && (await snapshot()).cargo === 1);
   await click('[data-seat="2"]'); await click('[data-passenger="1"]'); await click('[data-seat="1"]');
   check('Child-selected seat order is retained', JSON.stringify((await snapshot()).seats) === '[2,1,0]');
-  await holdUntil("window.__train.snapshot().phase === 'finished'"); await capture('station-finished'); await practice('station','finished'); await click('#finish');
-  check('Finished visit returns to selector', (await snapshot()).screen === 'select');
-  await click('[data-place="orchard"]'); await practice('orchard','driving'); await holdUntil("window.__train.snapshot().phase === 'helping'"); await capture('orchard-picking'); await practice('orchard','helping');
+  await wait('window.__train.snapshot().cargoAnchors.passengers.every(p => p.attached)');
+  const seated = JSON.stringify((await snapshot()).cargoAnchors.passengers);
+  await holdUntil('window.__train.snapshot().distance > 36');
+  check('Passengers stay fixed in their carriage seats through motion and turns', JSON.stringify((await snapshot()).cargoAnchors.passengers) === seated);
+  await holdUntil("window.__train.snapshot().phase === 'finished'"); await finishVisit('station'); await click('#play');
+  await click('[data-place="orchard"]'); await practice('orchard','driving'); await explore('orchard'); await holdUntil("window.__train.snapshot().phase === 'helping'"); await capture('orchard-picking'); await practice('orchard','helping');
   await click('[data-target="fruit-2"]'); await click('[data-target="fruit-0"]'); await click('[data-target="fruit-2"]');
   check('Orchard keeps the child’s chosen fruit order', JSON.stringify((await snapshot()).fruit) === '[2,0,2]'); await practice('orchard','riding');
-  await holdUntil("window.__train.snapshot().phase === 'finished'"); await capture('orchard-delivered'); await practice('orchard','finished'); await click('#finish');
+  await holdUntil("window.__train.snapshot().phase === 'finished'"); await capture('orchard-delivered'); await finishVisit('orchard');
   const perf = await snapshot();
   await browser('set','offline','on'); await browser('reload');
   await wait("document.querySelector('#game').dataset.ready === 'true'");

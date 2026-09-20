@@ -17,6 +17,16 @@ function hill(shapes: Shapes, x: number, z: number, radius: number, height: numb
   const g = new T.SphereGeometry(1, 12, 5, 0, Math.PI * 2, 0, Math.PI / 2);
   shapes.add(g, color, x, -0.16, z, radius, height, radius * 0.78);
 }
+function apple(shapes: Shapes, x: number, y: number, z: number, size: number, color: string) {
+  // A broad shoulder, tapered base and sunken crown read as an apple at phone size.
+  const radius = .3 * size;
+  const profile = [[0,-.82],[.42,-.78],[.82,-.45],[1,0],[.94,.55],[.62,.78],[.2,.64],[0,.6]];
+  const geometry = new T.LatheGeometry(profile.map(([r, h]) => new T.Vector2(r! * radius, h! * radius)), 12).toNonIndexed();
+  geometry.computeVertexNormals();
+  shapes.add(geometry, color, x, y, z);
+  shapes.beam(new T.Vector3(x, y + radius * .6, z), new T.Vector3(x + .045 * size, y + radius * 1.3, z), .025 * size, '#65432c');
+  shapes.add(new T.IcosahedronGeometry(1, 0), '#a9bf57', x + .13 * size, y + radius * 1.18, z, .15 * size, .045 * size, .075 * size, 0, -.4, .35);
+}
 export function tree(shapes: Shapes, x: number, z: number, size: number, pine = false, apples = false) {
   shapes.cylinder(x, 0.83 * size, z, 0.19 * size, 1.75 * size, '#866349', 0, 0, 0.11 * size, 7);
   if (pine) {
@@ -28,10 +38,11 @@ export function tree(shapes: Shapes, x: number, z: number, size: number, pine = 
       shapes.add(new T.IcosahedronGeometry(r!, 1), colors[c!]!, x+dx!*size, dy!*size, z+dz!*size, size, size*.9, size);
     }
   }
-  if (apples) for (let i = 0; i < 8; i++) {
-    const angle = i * Math.PI / 4, ax = x + Math.sin(angle) * size * 0.86, az = z + Math.cos(angle) * size * 0.85, ay = (2.05 + i % 3 * .24) * size;
-    shapes.ball(ax, ay, az, .18 * size, i % 2 ? '#cd634a' : '#b74938');
-    shapes.cylinder(ax, ay + .18 * size, az, .023, .11, '#72533d');
+  // The picking camera sees the east/south side. Hang fruit outside those canopy
+  // surfaces, rather than placing tiny red spheres inside the leaf clusters.
+  if (apples) {
+    const fruit = [[1.38,2.12,.2],[1.03,2.66,.52],[.42,3.16,.26],[.2,2.52,1.12],[.73,1.72,1.05],[-.45,1.67,.99],[-1.02,2.18,.65]];
+    fruit.forEach(([dx, dy, dz], i) => apple(shapes, x + dx! * size, dy! * size, z + dz! * size, size, i % 2 ? '#ef4931' : '#d92c24'));
   }
 }
 export function buildScenery(scene: T.Scene, shapes: Shapes) {

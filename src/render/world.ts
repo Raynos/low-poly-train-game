@@ -1,4 +1,9 @@
 import * as T from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+import { FXAAPass } from 'three/addons/postprocessing/FXAAPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { Shapes } from './shapes.ts';
 import { buildScenery, tree } from './scenery.ts';
 import { buildTrain, crate, passenger } from './train.ts';
@@ -6,12 +11,13 @@ import { trackPose, LOOP } from '../game/train.ts';
 import type { TrainState, CameraMode, Destination } from '../game/train.ts';
 
 export function createWorld(canvas: HTMLCanvasElement) {
-  const renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  const renderer = new T.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+  renderer.outputColorSpace = T.SRGBColorSpace;
+  renderer.info.autoReset = false;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = T.PCFSoftShadowMap;
+  renderer.shadowMap.type = T.PCFShadowMap;
   renderer.setClearColor('#c5dfe7');
-  renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+  renderer.toneMapping = T.AgXToneMapping; renderer.toneMappingExposure = 1.1;
   const scene = new T.Scene(); scene.fog = new T.Fog('#c5dfe7', 38, 115);
   const camera = new T.PerspectiveCamera(43, 1, 0.1, 160);
   scene.add(new T.HemisphereLight('#e9f5ff', '#798c6f', 1.7));
@@ -72,26 +78,43 @@ export function createWorld(canvas: HTMLCanvasElement) {
   const project = new T.Vector3();
   const cameraPosition = new T.Vector3(), target = new T.Vector3();
   let previousView = '', clock = 0;
+  // Wildshard's essential pipeline: linear HDR, morphological AA, then display mapping.
+  // SMAA lookup textures are embedded in Three.js; no runtime network dependency.
+  const hdr = renderer.extensions.has('EXT_color_buffer_float');
+  const sceneTarget = new T.WebGLRenderTarget(1, 1, { type: hdr ? T.HalfFloatType : T.UnsignedByteType, samples: Math.min(4, renderer.capabilities.maxSamples) });
+  const composer = new EffectComposer(renderer, sceneTarget);
+  const renderPass = new RenderPass(scene, camera);
+  const output = new OutputPass();
+  composer.addPass(renderPass);
+  if (hdr) { composer.addPass(new SMAAPass()); composer.addPass(output); }
+  else { composer.addPass(output); composer.addPass(new FXAAPass()); }
   function resize() {
     const width = canvas.clientWidth, height = canvas.clientHeight;
+    // Retain crisp Retina edges without allocating unbounded buffers on large displays.
+    const ratio = Math.min(Math.max(devicePixelRatio || 1, 1.5), 2, Math.sqrt(6_000_000 / Math.max(1, width * height)));
+    renderer.setPixelRatio(ratio); composer.setPixelRatio(ratio);
     camera.aspect = width / height; camera.updateProjectionMatrix(); renderer.setSize(width, height, false);
+    composer.setSize(width, height);
     previousView = '';
   }
   resize(); window.addEventListener('resize', resize);
   return {
     renderer,
+    quality: () => ({ hdr, aa: hdr ? 'MSAA + SMAA' : 'MSAA + FXAA', samples: sceneTarget.samples, toneMapping: 'AgX', pixelRatio: renderer.getPixelRatio(), width: canvas.width, height: canvas.height }),
     /** Scene-derived place cards. Separate camera/target; simulation and live viewport stay intact. */
     thumbnail(destination: Destination): string {
       const previewCamera = new T.PerspectiveCamera(40, 1.5, .1, 160);
       if (destination === 'station') { previewCamera.position.set(5.9, 7.1, -9.8); previewCamera.lookAt(14.5, 1.5, -.3); }
       else if (destination === 'orchard') { previewCamera.position.set(-7, 7.5, 11); previewCamera.lookAt(-16.4, 1.8, 0); }
       else { previewCamera.position.set(-10, 6.8, 13); previewCamera.lookAt(-2.6, .8, 3); }
-      const renderTarget = new T.WebGLRenderTarget(480, 320, { depthBuffer: true });
-      renderTarget.texture.colorSpace = T.SRGBColorSpace;
+      const renderTarget = new T.WebGLRenderTarget(480, 320, { depthBuffer: true, type: hdr ? T.HalfFloatType : T.UnsignedByteType, samples: Math.min(4, renderer.capabilities.maxSamples) });
+      const displayTarget = new T.WebGLRenderTarget(480, 320, { depthBuffer: false });
       const previousTarget = renderer.getRenderTarget();
       renderer.setRenderTarget(renderTarget); renderer.render(scene, previewCamera);
-      const pixels = new Uint8Array(480 * 320 * 4); renderer.readRenderTargetPixels(renderTarget, 0, 0, 480, 320, pixels);
-      renderer.setRenderTarget(previousTarget); renderTarget.dispose();
+      const thumbOutput = new OutputPass();
+      thumbOutput.renderToScreen = false; thumbOutput.render(renderer, displayTarget, renderTarget, 0, false);
+      const pixels = new Uint8Array(480 * 320 * 4); renderer.readRenderTargetPixels(displayTarget, 0, 0, 480, 320, pixels);
+      renderer.setRenderTarget(previousTarget); renderTarget.dispose(); displayTarget.dispose(); thumbOutput.dispose();
       const output = document.createElement('canvas'); output.width = 480; output.height = 320;
       const context = output.getContext('2d'); if (!context) return '';
       const data = context.createImageData(480, 320);
@@ -172,7 +195,8 @@ export function createWorld(canvas: HTMLCanvasElement) {
       if (view !== previousView || reduced || mode === 'cab' || mode === 'overview' || screen !== 'play') camera.position.copy(cameraPosition);
       else camera.position.lerp(cameraPosition, 1 - Math.exp(-dt * 10));
       camera.lookAt(target); previousView = view;
-      renderer.render(scene, camera);
+      renderer.info.reset();
+      composer.render(dt);
       renderer.shadowMap.autoUpdate = true;
     },
   };

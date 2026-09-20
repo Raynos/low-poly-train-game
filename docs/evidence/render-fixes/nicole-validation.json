@@ -1,0 +1,362 @@
+[
+  {
+    "file": "public/audio/en/apples-0.mp3",
+    "duration": 1.298,
+    "peak": 0.7974398136138916,
+    "rms": 0.09703907370567322
+  },
+  {
+    "file": "public/audio/en/apples-1.mp3",
+    "duration": 1.575333,
+    "peak": 0.7954980134963989,
+    "rms": 0.10429798066616058
+  },
+  {
+    "file": "public/audio/en/apples-2.mp3",
+    "duration": 1.81,
+    "peak": 0.7935064435005188,
+    "rms": 0.08315729349851608
+  },
+  {
+    "file": "public/audio/en/bridge-0.mp3",
+    "duration": 1.255333,
+    "peak": 0.8003738522529602,
+    "rms": 0.09443937242031097
+  },
+  {
+    "file": "public/audio/en/bridge-1.mp3",
+    "duration": 1.447333,
+    "peak": 0.799152135848999,
+    "rms": 0.09816104918718338
+  },
+  {
+    "file": "public/audio/en/bridge-2.mp3",
+    "duration": 1.639333,
+    "peak": 0.801361083984375,
+    "rms": 0.09160289913415909
+  },
+  {
+    "file": "public/audio/en/bye-0.mp3",
+    "duration": 1.234,
+    "peak": 0.7927514910697937,
+    "rms": 0.09428995847702026
+  },
+  {
+    "file": "public/audio/en/bye-1.mp3",
+    "duration": 1.596667,
+    "peak": 0.801771879196167,
+    "rms": 0.08681634068489075
+  },
+  {
+    "file": "public/audio/en/bye-2.mp3",
+    "duration": 1.703333,
+    "peak": 0.7936305403709412,
+    "rms": 0.1042260229587555
+  },
+  {
+    "file": "public/audio/en/full-0.mp3",
+    "duration": 1.148667,
+    "peak": 0.795929491519928,
+    "rms": 0.08740458637475967
+  },
+  {
+    "file": "public/audio/en/full-1.mp3",
+    "duration": 1.532667,
+    "peak": 0.7944475412368774,
+    "rms": 0.11403576284646988
+  },
+  {
+    "file": "public/audio/en/full-2.mp3",
+    "duration": 1.639333,
+    "peak": 0.7842885255813599,
+    "rms": 0.1053236573934555
+  },
+  {
+    "file": "public/audio/en/go-0.mp3",
+    "duration": 1.212667,
+    "peak": 0.8155089616775513,
+    "rms": 0.10393878817558289
+  },
+  {
+    "file": "public/audio/en/go-1.mp3",
+    "duration": 1.383333,
+    "peak": 0.7955428957939148,
+    "rms": 0.09811139106750488
+  },
+  {
+    "file": "public/audio/en/go-2.mp3",
+    "duration": 1.703333,
+    "peak": 0.795705258846283,
+    "rms": 0.09572526812553406
+  },
+  {
+    "file": "public/audio/en/help-0.mp3",
+    "duration": 1.148667,
+    "peak": 0.8061069846153259,
+    "rms": 0.08168333023786545
+  },
+  {
+    "file": "public/audio/en/help-1.mp3",
+    "duration": 1.447333,
+    "peak": 0.796489417552948,
+    "rms": 0.08705037087202072
+  },
+  {
+    "file": "public/audio/en/help-2.mp3",
+    "duration": 1.575333,
+    "peak": 0.7990609407424927,
+    "rms": 0.09449337422847748
+  },
+  {
+    "file": "public/audio/en/more-0.mp3",
+    "duration": 1.17,
+    "peak": 0.7936854362487793,
+    "rms": 0.10872561484575272
+  },
+  {
+    "file": "public/audio/en/more-1.mp3",
+    "duration": 1.639333,
+    "peak": 0.7995249032974243,
+    "rms": 0.10210065543651581
+  },
+  {
+    "file": "public/audio/en/more-2.mp3",
+    "duration": 1.938,
+    "peak": 0.7995827794075012,
+    "rms": 0.09569348394870758
+  },
+  {
+    "file": "public/audio/en/orchard-0.mp3",
+    "duration": 1.255333,
+    "peak": 0.7890537977218628,
+    "rms": 0.11003614962100983
+  },
+  {
+    "file": "public/audio/en/orchard-1.mp3",
+    "duration": 1.596667,
+    "peak": 0.7900000214576721,
+    "rms": 0.09804726392030716
+  },
+  {
+    "file": "public/audio/en/orchard-2.mp3",
+    "duration": 1.575333,
+    "peak": 0.7987439036369324,
+    "rms": 0.08285191655158997
+  },
+  {
+    "file": "public/audio/en/passenger-0.mp3",
+    "duration": 1.319333,
+    "peak": 0.7994633316993713,
+    "rms": 0.08470647782087326
+  },
+  {
+    "file": "public/audio/en/passenger-1.mp3",
+    "duration": 1.511333,
+    "peak": 0.8014208078384399,
+    "rms": 0.1194000169634819
+  },
+  {
+    "file": "public/audio/en/passenger-2.mp3",
+    "duration": 1.511333,
+    "peak": 0.7971240878105164,
+    "rms": 0.11576689034700394
+  },
+  {
+    "file": "public/audio/en/please-0.mp3",
+    "duration": 1.319333,
+    "peak": 0.8032509684562683,
+    "rms": 0.06793045997619629
+  },
+  {
+    "file": "public/audio/en/please-1.mp3",
+    "duration": 1.532667,
+    "peak": 0.8098269104957581,
+    "rms": 0.10403068363666534
+  },
+  {
+    "file": "public/audio/en/please-2.mp3",
+    "duration": 1.724667,
+    "peak": 0.7953541278839111,
+    "rms": 0.10163378715515137
+  },
+  {
+    "file": "public/audio/en/river-0.mp3",
+    "duration": 1.255333,
+    "peak": 0.7976307272911072,
+    "rms": 0.0998244509100914
+  },
+  {
+    "file": "public/audio/en/river-1.mp3",
+    "duration": 1.404667,
+    "peak": 0.746150016784668,
+    "rms": 0.09223534166812897
+  },
+  {
+    "file": "public/audio/en/river-2.mp3",
+    "duration": 1.660667,
+    "peak": 0.7999728322029114,
+    "rms": 0.11508667469024658
+  },
+  {
+    "file": "public/audio/en/seat-0.mp3",
+    "duration": 1.106,
+    "peak": 0.8045870065689087,
+    "rms": 0.10333685576915741
+  },
+  {
+    "file": "public/audio/en/seat-1.mp3",
+    "duration": 1.511333,
+    "peak": 0.8058300018310547,
+    "rms": 0.0867384672164917
+  },
+  {
+    "file": "public/audio/en/seat-2.mp3",
+    "duration": 1.724667,
+    "peak": 0.8005411624908447,
+    "rms": 0.09330885857343674
+  },
+  {
+    "file": "public/audio/en/sheep-0.mp3",
+    "duration": 1.148667,
+    "peak": 0.8014556765556335,
+    "rms": 0.08957711607217789
+  },
+  {
+    "file": "public/audio/en/sheep-1.mp3",
+    "duration": 1.596667,
+    "peak": 0.8002631068229675,
+    "rms": 0.09834566712379456
+  },
+  {
+    "file": "public/audio/en/sheep-2.mp3",
+    "duration": 1.660667,
+    "peak": 0.7953634858131409,
+    "rms": 0.09299157559871674
+  },
+  {
+    "file": "public/audio/en/sorry-0.mp3",
+    "duration": 1.298,
+    "peak": 0.8074274659156799,
+    "rms": 0.0839008018374443
+  },
+  {
+    "file": "public/audio/en/sorry-1.mp3",
+    "duration": 1.575333,
+    "peak": 0.8000726699829102,
+    "rms": 0.09737507253885269
+  },
+  {
+    "file": "public/audio/en/sorry-2.mp3",
+    "duration": 1.703333,
+    "peak": 0.7981243133544922,
+    "rms": 0.09539748728275299
+  },
+  {
+    "file": "public/audio/en/station-0.mp3",
+    "duration": 1.340667,
+    "peak": 0.8008995056152344,
+    "rms": 0.07243774831295013
+  },
+  {
+    "file": "public/audio/en/station-1.mp3",
+    "duration": 1.511333,
+    "peak": 0.794107973575592,
+    "rms": 0.09778240323066711
+  },
+  {
+    "file": "public/audio/en/station-2.mp3",
+    "duration": 1.831333,
+    "peak": 0.7945154309272766,
+    "rms": 0.11592326313257217
+  },
+  {
+    "file": "public/audio/en/stop-0.mp3",
+    "duration": 1.255333,
+    "peak": 0.7971100211143494,
+    "rms": 0.08201824128627777
+  },
+  {
+    "file": "public/audio/en/stop-1.mp3",
+    "duration": 1.554,
+    "peak": 0.7992640733718872,
+    "rms": 0.09334351867437363
+  },
+  {
+    "file": "public/audio/en/stop-2.mp3",
+    "duration": 1.81,
+    "peak": 0.7900366187095642,
+    "rms": 0.09391408413648605
+  },
+  {
+    "file": "public/audio/en/thanks-0.mp3",
+    "duration": 1.234,
+    "peak": 0.7976785898208618,
+    "rms": 0.07577402144670486
+  },
+  {
+    "file": "public/audio/en/thanks-1.mp3",
+    "duration": 1.340667,
+    "peak": 0.8006508350372314,
+    "rms": 0.0752493292093277
+  },
+  {
+    "file": "public/audio/en/thanks-2.mp3",
+    "duration": 1.767333,
+    "peak": 0.7906786203384399,
+    "rms": 0.09186491370201111
+  },
+  {
+    "file": "public/audio/en/train-0.mp3",
+    "duration": 1.276667,
+    "peak": 0.7968588471412659,
+    "rms": 0.07378162443637848
+  },
+  {
+    "file": "public/audio/en/train-1.mp3",
+    "duration": 1.383333,
+    "peak": 0.7897492051124573,
+    "rms": 0.09743129462003708
+  },
+  {
+    "file": "public/audio/en/train-2.mp3",
+    "duration": 1.831333,
+    "peak": 0.7938518524169922,
+    "rms": 0.09943361580371857
+  },
+  {
+    "file": "public/audio/en/tree-0.mp3",
+    "duration": 1.191333,
+    "peak": 0.7967236042022705,
+    "rms": 0.0884515792131424
+  },
+  {
+    "file": "public/audio/en/tree-1.mp3",
+    "duration": 1.340667,
+    "peak": 0.7899684309959412,
+    "rms": 0.11510144919157028
+  },
+  {
+    "file": "public/audio/en/tree-2.mp3",
+    "duration": 1.703333,
+    "peak": 0.8046456575393677,
+    "rms": 0.13588279485702515
+  },
+  {
+    "file": "public/audio/en/turn-0.mp3",
+    "duration": 1.234,
+    "peak": 0.799444854259491,
+    "rms": 0.09821265935897827
+  },
+  {
+    "file": "public/audio/en/turn-1.mp3",
+    "duration": 1.426,
+    "peak": 0.8312582969665527,
+    "rms": 0.10231483727693558
+  },
+  {
+    "file": "public/audio/en/turn-2.mp3",
+    "duration": 1.895333,
+    "peak": 0.8101789951324463,
+    "rms": 0.11013613641262054
+  }
+]

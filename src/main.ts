@@ -191,6 +191,6 @@ await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
 document.querySelector<HTMLElement>('#loading')!.hidden = true; app.inert = false; canvas.dataset.ready = 'true';
 window.dispatchEvent(new Event('game-ready')); last = performance.now(); requestAnimationFrame(frame);
 if (new URLSearchParams(location.search).has('debug')) {
-  Object.defineProperty(window, '__train', { value: Object.freeze({ snapshot: () => ({ ...structuredClone(state), screen, mode, held, paused, phrase, preferences: { ...preferences }, calls: world.renderer.info.render.calls, triangles: world.renderer.info.render.triangles,
+  Object.defineProperty(window, '__train', { value: Object.freeze({ snapshot: () => ({ ...structuredClone(state), screen, mode, held, paused, phrase, preferences: { ...preferences }, renderQuality: world.quality(), calls: world.renderer.info.render.calls, triangles: world.renderer.info.render.triangles,
     frameMs: frames.length ? { median: [...frames].sort((a,b) => a-b)[Math.floor(frames.length * 0.5)], p95: [...frames].sort((a,b) => a-b)[Math.floor(frames.length * 0.95)] } : null }) }) });
 }

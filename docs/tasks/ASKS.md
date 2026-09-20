@@ -16,3 +16,8 @@
 | 2026-09-20 | Use teammates as needed | Delegated scenery, illustrated UI, and soundscape; root integrated train and neural narration. |
 | 2026-09-20 | Initialize Git and require early, frequent commits in AGENTS.md | Added repository workflow policy and ignore rules; checkpoint the current game as the initial commit. |
 | 2026-09-20 | Use gh CLI to create a public repository and push the game | Publish main as Raynos/low-poly-train-game using gh. |
+| 2026-09-20 | Use Wildshard singleplayer HDR/AA settings to fix pixelated rendering | Compared local renderer; added HDR/AgX, MSAA/SMAA, higher resolution and output-correct thumbnails. |
+| 2026-09-20 | Apples are not visible on orchard trees | Larger apple-shaped fruit sits outside the camera-facing canopy. |
+| 2026-09-20 | Icons are not centered | Measured artwork bounds and corrected small-screen button sizing. |
+| 2026-09-20 | Give ten ideas to make the world feel alive | Proposed sheep, wind, water, passengers, birds, butterflies, responsive orchard, locomotive motion, clouds and small greetings; implementation not requested yet. |
+| 2026-09-20 | Five Kokoro voice options and listening samples; then regenerate all with Nicole | Created five matching auditions; switched all60 production clips and generator to af_nicole. |

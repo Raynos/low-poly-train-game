@@ -15,3 +15,4 @@
 | 2026-09-20 | Use Codex image generation instead of SVG icons | Generated 25 toy illustrations in shared offline PNG atlas; all runtime UI icons replaced. |
 | 2026-09-20 | Use teammates as needed | Delegated scenery, illustrated UI, and soundscape; root integrated train and neural narration. |
 | 2026-09-20 | Initialize Git and require early, frequent commits in AGENTS.md | Added repository workflow policy and ignore rules; checkpoint the current game as the initial commit. |
+| 2026-09-20 | Use gh CLI to create a public repository and push the game | Publish main as Raynos/low-poly-train-game using gh. |

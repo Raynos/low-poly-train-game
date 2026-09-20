@@ -21,7 +21,7 @@ No personal child information is stored.
   Model sorry alongside helping repair a small pretend mishap. Never require an apology.
 - Grown-up settings encourage following interest, expanding by a word, waiting for a response,
   and trying the same language afterward with toys or snacks.
-- 60 locally generated neural English clips (Kokoro af_heart, American English, speed 0.92),
+- 60 locally generated neural English clips (user-selected Kokoro af_nicole, American English, speed 0.92),
   bundled as MP3s and covered by the offline cache. See docs/design/remaster/VOICE.md for reproduction.
 - Three illustrated contextual word buttons remain available in every destination and activity phase.
 - Audio requires a gesture, and spoken words can be muted separately. Headless tests use mute=1.

@@ -29,7 +29,7 @@ output = root / ('tmp/voice-preview' if args.preview else 'public/audio/en')
 output.mkdir(parents=True, exist_ok=True)
 entries = [('preview', 0, 'Hello, friend! Go, little train! An apple, please. Thank you for helping.')] if args.preview else [(key, i, text) for key, texts in phrases.items() for i, text in enumerate(texts)]
 for key, i, text in entries:
-    samples, rate = kokoro.create(text, voice='af_heart', speed=0.92, lang='en-us')
+    samples, rate = kokoro.create(text, voice='af_nicole', speed=0.92, lang='en-us')
     # Keep natural pauses; pad edges so mobile decoding never clips the first consonant.
     samples = np.concatenate((np.zeros(int(rate * 0.07)), samples, np.zeros(int(rate * 0.14))))
     peak = np.max(np.abs(samples))
@@ -39,4 +39,4 @@ for key, i, text in entries:
     dest = output / f'{key}-{i}.mp3'
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(temp), '-codec:a', 'libmp3lame', '-b:a', '80k', str(dest)], check=True)
     print(f'{key}-{i}: {len(samples) / rate:.2f}s', flush=True)
-print('Voice: Kokoro af_heart, American English, speed 0.92. No runtime model dependency.')
+print('Voice: Kokoro af_nicole, American English, speed 0.92. No runtime model dependency.')

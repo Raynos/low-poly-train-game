@@ -1,6 +1,7 @@
 # Bundled neural narration
 
-Replaced macOS Samantha with **Kokoro af_heart**, American English, speed 0.92.
+The user selected **Kokoro af_nicole (Nicole)** after a five-voice audition.
+Bundled narration uses American English at speed 0.92, replacing the earlier af_heart clips.
 All 60 phrases come directly from `src/audio/phrases.ts`; no duplicate vocabulary bank.
 Runtime uses small MP3s, with no model download, API calls, microphone, or paid service.
 
@@ -20,6 +21,11 @@ The generator adapts the speed tensor to the ONNX export's declared float input.
 model license. [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) uses MIT.
 [Voice reference](https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md).
 Models and build environment are not shipped. Generated clips are not recordings of a child.
+
+Nicole regeneration verified all 60 MP3s with ffprobe and full ffmpeg PCM decode:
+1.106–1.938 seconds per clip, 89.016 seconds total, 941,820 bytes. Every clip contains
+non-silent finite audio; the largest decoded absolute sample is 0.832 or less, with
+no clipping detected. This is a file-integrity check, not a listening assessment.
 
 Browser decode checks establish file usability, not pronunciation quality. Caregiver
 listening on the child's actual device remains the acceptance check for clarity and warmth.

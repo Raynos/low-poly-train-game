@@ -19,3 +19,16 @@ SMAA lookup textures are embedded in the JS bundle and remain offline.
 Initial screenshot review at844×390 confirms much smoother rails, roof and boiler outlines
 after MSAA plus supersampling. Final browser performance/compatibility checks follow.
 Physical iPhone/iPad frame-time and memory acceptance still require device measurement.
+
+## Integrated acceptance
+
+- Strict types,20 unit tests and production build passed.
+- Chromium:47 checks passed, including world sheep/tree phrases in all visits, fixed carriage-local
+  passenger positions before/after travel, illustrated success dialogs, main-menu return,
+  dismissal without reopening, all practice phases and offline restart.
+- WebKit:17 checks passed at844×390 with DPR2, including HDR render quality and all60
+  Nicole MP3 decodes. Fresh-document startup with unavailable origin also passed. Playwright
+  WebKit setOffline reload retains its prior internal error and is not claimed as a pass.
+- Measured desktop Chromium frame intervals: {'median': 16.69999999999709, 'p95': 16.700000000004366}. Full rendering stats
+  include composer passes; see chromium.json for the snapshot. Not physical-mobile evidence.
+- All automated browser/audio verification remained muted. No user-computer speaker playback.

@@ -1,0 +1,155 @@
+{
+  "date": "2026-09-20T22:34:47.995Z",
+  "url": "http://127.0.0.1:4187",
+  "checks": [
+    "HDR and anti-aliasing pipeline is active",
+    "meadow/driving: three large illustrated word buttons",
+    "meadow/driving: word button models phrase",
+    "Holding moves, release stops immediately",
+    "Camera cycles to follow without resetting distance",
+    "Camera cycles to cab",
+    "Camera cycles back to overview",
+    "Meadow object exploration changes language context",
+    "Pause clears motion",
+    "Optional language models are available",
+    "pointercancel releases input",
+    "lostpointercapture releases input",
+    "blur releases input",
+    "resize releases input",
+    "station/driving: three large illustrated word buttons",
+    "station/driving: word button models phrase",
+    "station: world sheep models a phrase",
+    "station: world tree models a phrase",
+    "Station arrival does not auto-board passengers",
+    "station/helping: three large illustrated word buttons",
+    "station/helping: word button models phrase",
+    "Occupied seat preserves child selection",
+    "Child-selected seat order is retained",
+    "Passengers stay fixed in their carriage seats through motion and turns",
+    "station: illustrated success dialog stops driving",
+    "station/finished: three large illustrated word buttons",
+    "station/finished: word button models phrase",
+    "station: dismissing success does not reopen on UI changes",
+    "station: success returns to main menu",
+    "orchard/driving: three large illustrated word buttons",
+    "orchard/driving: word button models phrase",
+    "orchard: world sheep models a phrase",
+    "orchard: world tree models a phrase",
+    "orchard/helping: three large illustrated word buttons",
+    "orchard/helping: word button models phrase",
+    "Orchard keeps the child’s chosen fruit order",
+    "orchard/riding: three large illustrated word buttons",
+    "orchard/riding: word button models phrase",
+    "orchard: illustrated success dialog stops driving",
+    "orchard/finished: three large illustrated word buttons",
+    "orchard/finished: word button models phrase",
+    "orchard: dismissing success does not reopen on UI changes",
+    "orchard: success returns to main menu",
+    "Production app restarts offline",
+    "English narration asset is available offline",
+    "Gameplay works after offline restart",
+    "Portrait rotate prompt is visible"
+  ],
+  "perf": {
+    "calls": 35,
+    "cargo": 0,
+    "cargoAnchors": {
+      "crates": [
+        {
+          "attached": true,
+          "position": [
+            0,
+            1.06,
+            -0.59
+          ],
+          "visible": false
+        },
+        {
+          "attached": true,
+          "position": [
+            0,
+            1.06,
+            0
+          ],
+          "visible": false
+        },
+        {
+          "attached": true,
+          "position": [
+            0,
+            1.06,
+            0.59
+          ],
+          "visible": false
+        }
+      ],
+      "passengers": [
+        {
+          "attached": false,
+          "position": [
+            13.7,
+            0.42,
+            -1.15
+          ]
+        },
+        {
+          "attached": false,
+          "position": [
+            13.7,
+            0.42,
+            0
+          ]
+        },
+        {
+          "attached": false,
+          "position": [
+            13.7,
+            0.42,
+            1.15
+          ]
+        }
+      ]
+    },
+    "destination": "meadow",
+    "discoveries": [],
+    "distance": 4,
+    "frameMs": {
+      "median": 16.69999999999709,
+      "p95": 16.700000000004366
+    },
+    "fruit": [],
+    "held": false,
+    "mode": "follow",
+    "paused": false,
+    "phase": "driving",
+    "phrase": "Bye, friends.",
+    "preferences": {
+      "length": 1,
+      "reduced": false,
+      "sound": true,
+      "speech": true
+    },
+    "progress": 0,
+    "renderQuality": {
+      "aa": "MSAA + SMAA",
+      "hdr": true,
+      "height": 585,
+      "pixelRatio": 1.5,
+      "samples": 4,
+      "toneMapping": "AgX",
+      "width": 1266
+    },
+    "screen": "home",
+    "seats": [
+      -1,
+      -1,
+      -1
+    ],
+    "selected": null,
+    "speed": 0,
+    "stopAt": 18.84955592153876,
+    "triangles": 130827
+  },
+  "physicalDevice": false,
+  "audioPlayback": false
+}

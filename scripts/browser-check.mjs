@@ -26,6 +26,7 @@ async function practice(destination, phase) {
   check(`${destination}/${phase}: word button models phrase`, (await snapshot()).phrase === 'Little train.');
 }
 async function explore(place) {
+  while ((await snapshot()).mode !== 'overview') await click('#camera');
   for (const name of ['sheep','tree']) {
     await click(`[data-target="${name}"]`);
     check(`${place}: world ${name} models a phrase`, (await snapshot()).discoveries.includes(name) && (await snapshot()).phrase === (name === 'sheep' ? 'Hello, sheep.' : 'Green tree.'));

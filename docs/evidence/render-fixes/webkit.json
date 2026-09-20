@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-20T22:33:51.666Z",
+  "engine": "Desktop WebKit with mobile touch viewport, not physical iOS",
+  "checks": [
+    "WebKit dismisses loading and renders home",
+    "WebKit uses Retina HDR antialiasing",
+    "meadow: touch driving and release",
+    "Follow view",
+    "Cab view",
+    "World touch target works",
+    "station: touch driving and release",
+    "station: world phrase practice",
+    "station: chosen objects load",
+    "station: finished visit returns to menu",
+    "orchard: touch driving and release",
+    "orchard: world phrase practice",
+    "orchard: chosen objects load",
+    "orchard: finished visit returns to menu",
+    "Parent preferences persist",
+    "All 60 bundled clips decode without playback",
+    "No uncaught runtime errors"
+  ],
+  "errors": []
+}

@@ -1,24 +1,21 @@
 # Current status — September 20, 2026
 
-Remaster deployed to https://low-poly-train-game.vercel.app.
-Production deployment: dpl_FpYVgPnifuazoaHxaaGuQ1TPLFc6; PWA build de0daca5bea8d832.
+Public GitHub repository: https://github.com/Raynos/low-poly-train-game (main).
+Live app: https://low-poly-train-game.vercel.app; new playtest fixes awaiting final deployment.
 
-Three graphics passes improved the train/materials, landscape/lighting and illustrated
-controls/camera framing. Shared generated toy-icon atlas replaces runtime SVG controls;
-loading/app icon is generated too. Place cards use cached views of the actual 3D scene.
-Single camera button retains overview/follow/cab, with real boiler visible in the cab.
+Implemented follow-up fixes:
+- Wildshard-inspired HalfFloat HDR, AgX and MSAA/SMAA with1.5–2× bounded render scale.
+- Measured icon crops and corrected small-landscape play/drive button sizes.
+- Clearly visible larger apples outside orchard foliage.
+- All60 bundled English clips use Nicole (af_nicole); generator/docs updated.
+- Passengers and crates attach to carriage local coordinates, preventing trailing/sliding.
+- Sheep/tree/water/bridge discovery targets available across all three destinations.
+- Generated-art success dialog, Back to menu, optional replay and look-around dismissal.
 
-All three destinations have persistent contextual word-practice buttons in every phase.
-60 local Kokoro af_heart English voice clips replace macOS speech; no runtime model/network
-needed. Train has speed-linked chuffs, rail clacks, rumble, stop hiss and a soft whistle,
-with speech ducking and lifecycle silence. Core choices and finish-to-selector are preserved.
+Strict typing,20 unit tests and build pass.17 WebKit checks passed, including Retina HDR,
+world phrases across visits, menu return and all60 Nicole decodes. 47 Chromium checks passed, including stable passenger seats and full offline restart.
+WebKit origin-failure offline startup passed; production publication is next. All automated checks muted; no speaker playback.
 
-Strict types, 20 unit tests, 36 local Chromium gameplay/word/offline checks, 14 WebKit
-checks (including all neural clip decodes), and six PWA lifecycle checks passed. Final
-WebKit build starts a fresh cached document with origin unavailable. Playwright WebKit
-setOffline reload still errors and is not claimed as a pass. All 36 live Chromium checks passed, including complete visits, word practice and offline restart.
-Reports are in docs/evidence/remaster; all headless checks were muted.
-
-Real iPhone/iPad sustained 60 FPS, listening/balance, Safari audio interruptions and supervised
-age-three play remain acceptance work. Guided travel remains one loop without switches.
-No therapeutic or Montessori certification claims. See docs/LANGUAGE-PLAY.md.
+Physical iPhone/iPad sustained60FPS, memory, speaker balance, Safari interruptions and supervised
+age-three engagement remain unverified. World-animation ideas were proposed, not implemented.
+Guided travel remains one loop. No therapy or Montessori certification claims.

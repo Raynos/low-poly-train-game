@@ -1,7 +1,8 @@
 # Current status — September 20, 2026
 
 Public GitHub repository: https://github.com/Raynos/low-poly-train-game (main).
-Live app: https://low-poly-train-game.vercel.app; new playtest fixes awaiting final deployment.
+Live app: https://low-poly-train-game.vercel.app. Playtest fixes published as
+deployment dpl_FbishhAbjDjkEX9GY41zE24ETKiH; PWA build a082b6f24dfeef39.
 
 Implemented follow-up fixes:
 - Wildshard-inspired HalfFloat HDR, AgX and MSAA/SMAA with1.5–2× bounded render scale.
@@ -14,7 +15,8 @@ Implemented follow-up fixes:
 
 Strict typing,20 unit tests and build pass.17 WebKit checks passed, including Retina HDR,
 world phrases across visits, menu return and all60 Nicole decodes. 47 Chromium checks passed, including stable passenger seats and full offline restart.
-WebKit origin-failure offline startup passed; production publication is next. All automated checks muted; no speaker playback.
+WebKit origin-failure offline startup passed. All47 live Chromium checks also passed,
+including both completed journeys, stable seating, main-menu return and offline restart. All automated checks muted; no speaker playback.
 
 Physical iPhone/iPad sustained60FPS, memory, speaker balance, Safari interruptions and supervised
 age-three engagement remain unverified. World-animation ideas were proposed, not implemented.

@@ -1,0 +1,22 @@
+{
+  "/ui/journey-complete.png": {
+    "matches_build": true,
+    "sha256": "6c32a3cca2f4a2f5b9ad94ac0338aebc879378a3273f6b1310f4e21bf40a97f3"
+  },
+  "/ui/toy-icons.png": {
+    "matches_build": true,
+    "sha256": "78938ebe66f2231c141e745e576ef34668161cf1ecbe3ad9bfd2251c3c286ede"
+  },
+  "/audio/en/please-2.mp3": {
+    "matches_build": true,
+    "sha256": "d585e551917be4203c888d8edf310a60c59d0b05c63274c380d04eab63fa91fd"
+  },
+  "/audio/en/sorry-1.mp3": {
+    "matches_build": true,
+    "sha256": "36acf3a19495fcc34f6e2b818f1f12db2eb085a4a4d5716fe1a2f0ebb77e93bf"
+  },
+  "/sw.js": {
+    "matches_build": true,
+    "sha256": "76d371967b3059d9a7939a76d37d85e5a1935e170f693c99e8aa3d8a2ee5b40c"
+  }
+}

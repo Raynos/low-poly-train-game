@@ -32,3 +32,10 @@ Physical iPhone/iPad frame-time and memory acceptance still require device measu
 - Measured desktop Chromium frame intervals: {'median': 16.69999999999709, 'p95': 16.700000000004366}. Full rendering stats
   include composer passes; see chromium.json for the snapshot. Not physical-mobile evidence.
 - All automated browser/audio verification remained muted. No user-computer speaker playback.
+
+Published production build a082b6f24dfeef39 as deployment dpl_FbishhAbjDjkEX9GY41zE24ETKiH.
+Public asset hashes match the local build, including Nicole samples and the generated success
+artwork. GitHub is public at https://github.com/Raynos/low-poly-train-game.
+
+All47 production-origin Chromium checks passed after publication, with every browser session
+closed afterward. Full report: public-chromium.json. No audio playback was used.

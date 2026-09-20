@@ -34,4 +34,4 @@
 - [x] Parent seated passengers and crates to the carriage to prevent sliding.
 - [x] Enable sheep/tree/water/bridge word discovery in every destination.
 - [x] Generated-art success modal with Back to menu and optional replay.
-- [ ] Complete integrated playtest regression and publish fixes.
+- [x] Complete integrated playtest regression and publish fixes (47 live Chromium checks).

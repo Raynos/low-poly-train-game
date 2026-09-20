@@ -1,0 +1,10 @@
+node_modules/
+dist/
+tmp/
+.vercel/
+.DS_Store
+*.local
+.env*
+__pycache__/
+*.py[cod]
+.venv/

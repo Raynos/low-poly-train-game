@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-20T21:53:57.336Z",
+  "url": "http://127.0.0.1:4187",
+  "checks": [
+    "Holding moves, release stops immediately",
+    "Camera cycles to follow without resetting distance",
+    "Camera cycles to cab",
+    "Camera cycles back to overview",
+    "Meadow object exploration changes language context",
+    "Pause clears motion",
+    "Optional language models are available",
+    "pointercancel releases input",
+    "lostpointercapture releases input",
+    "blur releases input",
+    "resize releases input",
+    "Station arrival does not auto-board passengers",
+    "Occupied seat preserves child selection",
+    "Child-selected seat order is retained",
+    "Finished visit returns to selector",
+    "Orchard keeps the child’s chosen fruit order",
+    "Production app restarts offline",
+    "English narration asset is available offline",
+    "Gameplay works after offline restart",
+    "Portrait rotate prompt is visible"
+  ],
+  "perf": {
+    "calls": 22,
+    "cargo": 3,
+    "destination": "orchard",
+    "discoveries": [],
+    "distance": 94.2477796076938,
+    "frameMs": {
+      "median": 16.69999999999709,
+      "p95": 16.799999999995634
+    },
+    "fruit": [
+      2,
+      0,
+      2
+    ],
+    "held": false,
+    "mode": "overview",
+    "paused": false,
+    "phase": "finished",
+    "phrase": "Bye, friends.",
+    "preferences": {
+      "length": 1,
+      "reduced": false,
+      "sound": true,
+      "speech": true
+    },
+    "progress": 0,
+    "screen": "select",
+    "seats": [
+      -1,
+      -1,
+      -1
+    ],
+    "selected": null,
+    "speed": 0,
+    "stopAt": 94.2477796076938,
+    "triangles": 34668
+  },
+  "physicalDevice": false,
+  "audioPlayback": false
+}

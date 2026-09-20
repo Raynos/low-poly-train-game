@@ -1,0 +1,17 @@
+# Requests
+
+| Date | Request | Outcome |
+| --- | --- | --- |
+| 2026-09-20 | Scaffold based on sibling low-poly-fire-truck; Montessori age three; PWA, 60 FPS, offline caching; train driving/simulator with mockups to follow | Scaffold implemented; provisional train loop and inherited PWA foundation; mockup brief prepared; device performance and final design pending. |
+| 2026-09-20 | Stop before building; spawn child processes for main menu, loading, selector and at least five gameplay mockups; require approval before implementation/deployment | Implementation paused. Three child agents completed eight generated concept images and a review gallery. Awaiting design approval. No deployment. |
+| 2026-09-20 | Approve mockups and build all of it; use one button to toggle driving views | Full screen flow, three places, overview/follow/cab toggle implemented. |
+| 2026-09-20 | Add English language learning through fun toddler play, words, phrases and optional imitation | Bundled contextual voice clips, phrase length settings, replay and social word book; no microphone, speech grading or speech gates. |
+| 2026-09-20 | Read the sibling fire truck review and carry the lessons forward | Read task “Review toddler gameplay depth” and written audit; object choices, distinct tasks, loaded journeys and finish-to-selector implemented. See docs/design/AUDIT-LEARNINGS.md. |
+
+| 2026-09-20 | Replace robotic TTS | All 60 English clips regenerated with local Kokoro af_heart neural voice; bundled offline. |
+| 2026-09-20 | Two or three graphics improvement passes, keep low-poly style | Train/material, landscape/lighting, and illustrated UI/camera refinement passes. See docs/evidence/remaster. |
+| 2026-09-20 | Train engine and movement sound effects | Speed-linked steam chuffs, wheel clacks, rolling rumble, stop hiss and whistle; speech ducking. |
+| 2026-09-20 | Word-practice icons in every level | Persistent contextual three-word dock in every destination and activity phase. |
+| 2026-09-20 | Use Codex image generation instead of SVG icons | Generated 25 toy illustrations in shared offline PNG atlas; all runtime UI icons replaced. |
+| 2026-09-20 | Use teammates as needed | Delegated scenery, illustrated UI, and soundscape; root integrated train and neural narration. |
+| 2026-09-20 | Initialize Git and require early, frequent commits in AGENTS.md | Added repository workflow policy and ignore rules; checkpoint the current game as the initial commit. |

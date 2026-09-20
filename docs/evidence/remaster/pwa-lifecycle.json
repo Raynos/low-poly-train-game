@@ -1,0 +1,13 @@
+{
+  "date": "2026-09-20T22:13:31.988Z",
+  "checks": [
+    "First version is completely installed",
+    "New version waits while the old game stays open",
+    "Both complete versions coexist until safe activation",
+    "Offline reload uses the fully cached old version while update waits",
+    "Safe reopen activates the new version and removes the old shell",
+    "New version also restarts offline"
+  ],
+  "expected": 6,
+  "complete": true
+}

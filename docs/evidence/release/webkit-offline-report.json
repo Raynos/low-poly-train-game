@@ -1,0 +1,24 @@
+{
+  "installed": {
+    "controlled": true,
+    "caches": [
+      "little-train-immutable",
+      "little-train-shell-09ab3aa7a1a19f5c"
+    ],
+    "status": "Ready to play offline"
+  },
+  "onlineTimeOrigin": 1789941393344,
+  "unavailableOrigin": {
+    "timeOrigin": 1789941393485,
+    "ready": "true",
+    "screen": "home"
+  },
+  "emulatedOfflineReload": "Error: page.reload: WebKit encountered an internal error\nCall log:\n\u001b[2m  - waiting for navigation until \"load\"\u001b[22m\n",
+  "afterOffline": {
+    "timeOrigin": 1789941393485,
+    "url": "http://127.0.0.1:55824/?debug=1&mute=1",
+    "title": "Little Train",
+    "text": "SMALL HANDS. BIG LITTLE JOURNEYS.\nLittle Train\nLet's go somewhere lovely.\nAll aboard\nA gentle world to explore together\n\nPlaying offline",
+    "ready": "true"
+  }
+}

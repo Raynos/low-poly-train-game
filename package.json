@@ -1,0 +1,37 @@
+{
+  "name": "low-poly-train-game",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "A calm toy train game with child-led discoveries and optional English language play.",
+  "packageManager": "pnpm@10.21.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/stamp-pwa.mjs",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm typecheck && pnpm test && pnpm build",
+    "test": "node --test src/game/*.test.ts scripts/*.test.mjs",
+    "check:browser": "node scripts/browser-check.mjs",
+    "check:webkit": "node scripts/webkit-check.mjs",
+    "check:pwa": "node scripts/pwa-lifecycle.mjs"
+  },
+  "dependencies": {
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@types/three": "0.186.0",
+    "playwright": "1.62.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

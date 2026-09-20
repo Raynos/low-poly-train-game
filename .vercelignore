@@ -1,0 +1,6 @@
+assets/
+docs/
+project/
+tmp/
+node_modules/
+.git/

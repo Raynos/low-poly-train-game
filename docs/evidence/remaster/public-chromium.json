@@ -1,0 +1,82 @@
+{
+  "date": "2026-09-20T22:18:00.686Z",
+  "url": "https://low-poly-train-game.vercel.app",
+  "checks": [
+    "meadow/driving: three large illustrated word buttons",
+    "meadow/driving: word button models phrase",
+    "Holding moves, release stops immediately",
+    "Camera cycles to follow without resetting distance",
+    "Camera cycles to cab",
+    "Camera cycles back to overview",
+    "Meadow object exploration changes language context",
+    "Pause clears motion",
+    "Optional language models are available",
+    "pointercancel releases input",
+    "lostpointercapture releases input",
+    "blur releases input",
+    "resize releases input",
+    "station/driving: three large illustrated word buttons",
+    "station/driving: word button models phrase",
+    "Station arrival does not auto-board passengers",
+    "station/helping: three large illustrated word buttons",
+    "station/helping: word button models phrase",
+    "Occupied seat preserves child selection",
+    "Child-selected seat order is retained",
+    "station/finished: three large illustrated word buttons",
+    "station/finished: word button models phrase",
+    "Finished visit returns to selector",
+    "orchard/driving: three large illustrated word buttons",
+    "orchard/driving: word button models phrase",
+    "orchard/helping: three large illustrated word buttons",
+    "orchard/helping: word button models phrase",
+    "Orchard keeps the child’s chosen fruit order",
+    "orchard/riding: three large illustrated word buttons",
+    "orchard/riding: word button models phrase",
+    "orchard/finished: three large illustrated word buttons",
+    "orchard/finished: word button models phrase",
+    "Production app restarts offline",
+    "English narration asset is available offline",
+    "Gameplay works after offline restart",
+    "Portrait rotate prompt is visible"
+  ],
+  "perf": {
+    "calls": 37,
+    "cargo": 3,
+    "destination": "orchard",
+    "discoveries": [],
+    "distance": 94.2477796076938,
+    "frameMs": {
+      "median": 16.69999999999709,
+      "p95": 16.799999999995634
+    },
+    "fruit": [
+      2,
+      0,
+      2
+    ],
+    "held": false,
+    "mode": "overview",
+    "paused": false,
+    "phase": "finished",
+    "phrase": "Bye, friends.",
+    "preferences": {
+      "length": 1,
+      "reduced": false,
+      "sound": true,
+      "speech": true
+    },
+    "progress": 0,
+    "screen": "select",
+    "seats": [
+      -1,
+      -1,
+      -1
+    ],
+    "selected": null,
+    "speed": 0,
+    "stopAt": 94.2477796076938,
+    "triangles": 126599
+  },
+  "physicalDevice": false,
+  "audioPlayback": false
+}

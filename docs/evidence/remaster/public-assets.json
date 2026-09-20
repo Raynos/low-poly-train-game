@@ -1,0 +1,22 @@
+{
+  "/ui/toy-icons.png": {
+    "matches_build": true,
+    "sha256": "78938ebe66f2231c141e745e576ef34668161cf1ecbe3ad9bfd2251c3c286ede"
+  },
+  "/icons/icon-192.png": {
+    "matches_build": true,
+    "sha256": "af18c559199681817e4bc6e54fc3cdbf208128fd2712ec8e1cf3f51450d619ae"
+  },
+  "/audio/en/please-2.mp3": {
+    "matches_build": true,
+    "sha256": "2fe99f957b8dc6ee7e585ccdcedfac6878ef67e2e75e57ab67913aa3582c68f8"
+  },
+  "/audio/en/sorry-1.mp3": {
+    "matches_build": true,
+    "sha256": "9d131514ba284f7a694713df63d96b47067965c08f1110059adfe4e81a6e9530"
+  },
+  "/sw.js": {
+    "matches_build": true,
+    "sha256": "920d62ca009ee511fd60817d24b4f2c21f1bcfe8cd6ec7f49da2b493283a21e5"
+  }
+}

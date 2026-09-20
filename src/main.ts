@@ -34,6 +34,7 @@ let state = createTrain();
 let screen: 'home' | 'select' | 'play' = 'home';
 let mode: CameraMode = 'overview';
 let held = false, paused = false, pointer: number | null = null;
+let successShown = false;
 let accumulator = 0, last = performance.now(), previousPhase = state.phase;
 let frames: number[] = [];
 const modal = document.createElement('dialog'); modal.id = 'modal'; app.append(modal);
@@ -50,20 +51,39 @@ function button(id: string, title: string, symbol: string, cls = 'round'): strin
   return `<button id="${id}" class="${cls}" aria-label="${title}" title="${title}">${icon(symbol)}</button>`;
 }
 function on(id: string, fn: () => void) { document.getElementById(id)?.addEventListener('click', fn); }
-function closeModal() { sound.stop(); modal.close(); paused = false; release(); last = performance.now(); accumulator = 0; }
+function closeModal() {
+  sound.stop(); modal.close(); paused = false; release(); last = performance.now(); accumulator = 0;
+  if (screen === 'play' && state.phase === 'finished') document.querySelector<HTMLButtonElement>('#finish-world')?.focus({ preventScroll: true });
+}
 function go(next: typeof screen) {
   release(); sound.stop(); screen = next; paused = false; modal.close();
   if (screen === 'home') state = createTrain();
   renderUI();
 }
 function start(destination: Destination) {
+  modal.close(); sound.stop(); successShown = false;
   state = createTrain(destination); previousPhase = state.phase; screen = 'play'; paused = false; release();
   renderUI(); document.querySelector<HTMLButtonElement>('#drive')?.focus({ preventScroll: true }); sound.unlock(); sound.speak(destination === 'meadow' ? 'train' : destination, true);
 }
 function showModal(content: string) {
   release(); sound.stop(); paused = true;
+  delete modal.dataset.kind; modal.removeAttribute('aria-labelledby'); modal.removeAttribute('aria-describedby');
   modal.innerHTML = `${button('close-modal', 'Back to the game', 'close')}<div class="modal-body">${content}</div>`;
   if (!modal.open) modal.showModal(); on('close-modal', closeModal);
+}
+function showSuccess() {
+  successShown = true;
+  const station = state.destination === 'station';
+  showModal(`<div class="journey-success"><img class="success-art" src="/ui/journey-complete.png" alt="" draggable="false"><div class="success-content">
+    <h2 id="journey-title">${station ? 'Friends are home!' : 'Apples delivered!'}</h2>
+    <p id="journey-description">${station ? 'A lovely ride together.' : 'You brought apples to the station.'}</p>
+    <div class="success-actions"><button id="finish" class="pill">${icon('places')}<span>Back to menu</span></button><button id="play-again" class="pill">${icon('train')}<span>Play again</span></button></div>
+    <button id="back-to-world" class="success-look">${icon('tree')}<span>Look around</span></button></div></div>`);
+  modal.dataset.kind = 'success'; modal.setAttribute('aria-labelledby', 'journey-title'); modal.setAttribute('aria-describedby', 'journey-description');
+  on('finish', () => { go('home'); sound.speak('bye', true); });
+  on('play-again', () => start(state.destination));
+  on('back-to-world', closeModal);
+  document.querySelector<HTMLButtonElement>('#finish')?.focus({ preventScroll: true });
 }
 function showSettings() {
   showModal(`<small class="eyebrow">FOR GROWN-UPS</small><h2>A little room to grow</h2>
@@ -118,7 +138,7 @@ function renderUI() {
       <div class="bottom-left">${button('bell','Blow the train whistle','whistle')}${button('places','Choose another place','places')}</div>
       ${!helping && !finished ? `${button('drive','Hold to drive the train','play','round drive')}<div class="drive-caption">Hold to go</div>` : ''}
       ${helping && state.destination === 'station' ? `<section class="activity-tray" aria-label="Choose passengers and seats"><span class="tray-label">${state.selected === null ? 'Who is coming along?' : 'Choose a seat'}</span><div class="choices">${[0,1,2].map(i => state.selected === null ? `<button data-passenger="${i}" class="choice person-${i}" aria-label="Invite ${['coral','blue','yellow'][i]} friend" ${state.seats.includes(i) ? 'disabled' : ''}>${icon(personIcons[i]!)}</button>` : `<button data-seat="${i}" class="choice" aria-label="Seat ${i + 1}${state.seats[i] !== -1 ? ', occupied' : ', empty'}">${icon(state.seats[i] === -1 ? 'seat' : personIcons[state.seats[i]!]!)}</button>`).join('')}</div></section>` : ''}
-      ${finished ? `<div class="completion"><span>${state.destination === 'station' ? 'A lovely ride together.' : 'Apples delivered.'}</span><button id="finish" class="pill">${icon('places')}Where next?</button></div>` : ''}`;
+      ${finished ? `<div class="completion"><span>${state.destination === 'station' ? 'Friends are home.' : 'Apples delivered.'}</span><button id="finish-world" class="pill">${icon('places')}Back to menu</button><button id="show-success" class="pill">${icon('train')}Our journey</button></div>` : ''}`;
     ui.querySelectorAll<HTMLButtonElement>('[data-practice]').forEach(el => el.addEventListener('click', () => {
       release(); sound.unlock(); sound.speak(el.dataset.practice as Word, true);
     }));
@@ -126,7 +146,8 @@ function renderUI() {
     on('camera', () => { mode = CAMERAS[(CAMERAS.indexOf(mode) + 1) % CAMERAS.length]!; app.dataset.camera = mode; });
     on('repeat', () => { sound.unlock(); sound.speak(sound.word, true); });
     on('bell', () => { sound.bell(); discover(state, 'bell'); });
-    on('finish', () => { go('select'); sound.speak('bye', true); });
+    on('finish-world', () => { go('home'); sound.speak('bye', true); });
+    on('show-success', showSuccess);
     ui.querySelectorAll<HTMLButtonElement>('[data-passenger]').forEach(el => el.addEventListener('click', () => { if (choosePassenger(state, Number(el.dataset.passenger))) { sound.speak('passenger', true); renderUI(); } }));
     ui.querySelectorAll<HTMLButtonElement>('[data-seat]').forEach(el => el.addEventListener('click', () => {
       if (chooseSeat(state, Number(el.dataset.seat))) { sound.speak(state.phase === 'riding' ? 'full' : 'seat', true); previousPhase = state.phase; renderUI(); }
@@ -146,11 +167,12 @@ function renderUI() {
       el.setAttribute('aria-label', fruit ? `Pick an apple from tree ${Number(target.id.at(-1)) + 1}` : `Explore ${target.id}`);
       el.innerHTML = icon(fruit ? 'apple' : target.id); targets.append(el);
       el.addEventListener('click', () => {
-        sound.unlock();
+        release(); sound.unlock();
         if (fruit) { if (pickFruit(state, Number(target.id.at(-1)))) { sound.speak(state.phase === 'riding' ? 'apples' : 'orchard', true); if (state.phase === 'riding') { previousPhase = state.phase; renderUI(); } } }
         else { discover(state, target.id); world.react(target.id); sound.speak(target.id as Word, true); el.classList.add('visited'); }
       });
     }
+    if (finished && !successShown) showSuccess();
   }
 }
 modal.addEventListener('cancel', event => { event.preventDefault(); closeModal(); });
@@ -191,6 +213,6 @@ await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
 document.querySelector<HTMLElement>('#loading')!.hidden = true; app.inert = false; canvas.dataset.ready = 'true';
 window.dispatchEvent(new Event('game-ready')); last = performance.now(); requestAnimationFrame(frame);
 if (new URLSearchParams(location.search).has('debug')) {
-  Object.defineProperty(window, '__train', { value: Object.freeze({ snapshot: () => ({ ...structuredClone(state), screen, mode, held, paused, phrase, preferences: { ...preferences }, renderQuality: world.quality(), calls: world.renderer.info.render.calls, triangles: world.renderer.info.render.triangles,
+  Object.defineProperty(window, '__train', { value: Object.freeze({ snapshot: () => ({ ...structuredClone(state), screen, mode, held, paused, phrase, preferences: { ...preferences }, renderQuality: world.quality(), cargoAnchors: world.cargoAnchors(), calls: world.renderer.info.render.calls, triangles: world.renderer.info.render.triangles,
     frameMs: frames.length ? { median: [...frames].sort((a,b) => a-b)[Math.floor(frames.length * 0.5)], p95: [...frames].sort((a,b) => a-b)[Math.floor(frames.length * 0.95)] } : null }) }) });
 }
